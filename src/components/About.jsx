@@ -4,11 +4,11 @@ import React from 'react'
 export default function About() {
   return (
     <>
-    <div className=' h-[100vh] bg-red-400'>
+    <div className=' h-[100vh] bg-red-400 p-8'>
     <div className="container mx-auto px-4">
       <div className="max-w-2xl mx-auto text-center">
         <h2 className="text-4xl font-semibold mb-4">About Cancer Prediction</h2>
-        <p className="text-gray-700 leading-relaxed font-bold">
+        <p className="p-8 text-gray-700 leading-relaxed font-bold">
           Our website is dedicated to providing accurate predictions and
           information about cancer. We utilize advanced machine learning
           algorithms and data analysis techniques to predict the likelihood of
