@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import Toast from './Toast';
 
 
 export default function Lung() {
@@ -9,6 +10,8 @@ export default function Lung() {
   SWALLOWING_DIFFICULTY : "",CHEST_PAIN : ""};
 
   const [inputData, setInputdata] = useState(data)
+  const [isToaster, setToaster] = useState(false)
+  const [message, setMessage] = useState("")
 
   const handleData = (e)=>{
     setInputdata({...inputData, [e.target.name]:e.target.value})
@@ -18,16 +21,19 @@ export default function Lung() {
   const handleSubmit = (e)=>{
     e.preventDefault();
   for (let i in inputData) inputData[i] = Number(inputData[i])
-    console.log(inputData)
     axios.post("http://127.0.0.1:8000/api/v1/lung-predict", inputData)
     .then((response)=>{
-      console.log(response)
+      console.log(response.data);
+      setMessage(response.data.message);
+      setToaster(true);
+      window.scrollTo(0,0);
     })
   }
 
 
   return (
     <div className='h-[200vh] bg-gradient-to-r from-purple-500 to-pink-500'>
+      {isToaster&&<Toast message={message} setToaster={setToaster}/>}
       <div className="container mx-auto p-8">
   <h1 className="text-4xl font-bold text-center mb-8">
     Lung Cancer Prediction
