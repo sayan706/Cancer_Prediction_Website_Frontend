@@ -1,6 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
+
 
 export default function Lung() {
+  const data = {AGE : "",SMOKING : "",YELLOW_FINGERS : "",ANXIETY :"",PEER_PRESSURE : ""
+  , CHRONIC_DISEASE : "",FATIGUE : "",ALLERGY : "", WHEEZING : "", 
+  ALCHOHOL: "",CONSUMING:"",COUGHING : "",SHORTNESS_OF_BREATH: "",
+  SWALLOWING_DIFFICULTY : "",CHEST_PAIN : ""};
+
+  const [inputData, setInputdata] = useState(data)
+
+  const handleData = (e)=>{
+    setInputdata({...inputData, [e.target.name]:e.target.value})
+
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+  for (let i in inputData) inputData[i] = Number(inputData[i])
+    console.log(inputData)
+    axios.post("http://127.0.0.1:8000/api/v1/lung-predict", inputData)
+    .then((response)=>{
+      console.log(response)
+    })
+  }
+
+
   return (
     <div className='h-[200vh] bg-gradient-to-r from-purple-500 to-pink-500'>
       <div className="container mx-auto p-8">
@@ -14,9 +39,11 @@ export default function Lung() {
           Age:
         </label>
         <input
-          type="number" min="0" max="100"
+          type="number"  min="0"
           id="AGE"
           name="AGE"
+          value={inputData.AGE}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter age"
@@ -31,6 +58,8 @@ export default function Lung() {
           type="number" min="0"
           id="SMOKING"
           name="SMOKING"
+          value={inputData.SMOKING}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter smoking years"
@@ -45,6 +74,8 @@ export default function Lung() {
           type="number"
           id="YELLOW_FINGERS" min="0"
           name="YELLOW_FINGERS"
+          value={inputData.YELLOW_FINGERS}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter yellow fingers"
@@ -59,6 +90,8 @@ export default function Lung() {
           type="number" min="0"
           id="ANXIETY"
           name="ANXIETY"
+          value={inputData.ANXIETY}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Anxiety"
@@ -73,6 +106,8 @@ export default function Lung() {
           type="number" min="0"
           id="PEER_PRESSURE"
           name="PEER_PRESSURE"
+          value={inputData.PEER_PRESSURE}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Peer Pressure"
@@ -87,6 +122,8 @@ export default function Lung() {
           type="number" min="0"
           id="CHRONIC_DISEASE"
           name="CHRONIC_DISEASE"
+          value={inputData.CHRONIC_DISEASE}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Chronic Disease"
@@ -101,6 +138,8 @@ export default function Lung() {
           type="number" min="0"
           id="FATIGUE"
           name="FATIGUE"
+          value={inputData.FATIGUE}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Fatigue"
@@ -115,6 +154,8 @@ export default function Lung() {
           type="number" min="0"
           id="ALLERGY"
           name="ALLERGY"
+          value={inputData.ALLERGY}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Allergy"
@@ -129,6 +170,8 @@ export default function Lung() {
           type="number" min="0"
           id="WHEEZING"
           name="WHEEZING"
+          value={inputData.WHEEZING}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Wheezing"
@@ -143,6 +186,8 @@ export default function Lung() {
           type="number" min="0"
           id="ALCHOHOL"
           name="ALCHOHOL"
+          value={inputData.ALCHOHOL}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Alchohol"
@@ -157,6 +202,8 @@ export default function Lung() {
           type="number" min="0"
           id="CONSUMING"
           name="CONSUMING"
+          value={inputData.CONSUMING}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Consuming"
@@ -171,6 +218,8 @@ export default function Lung() {
           type="number" min="0"
           id="COUGHING"
           name="COUGHING"
+          value={inputData.COUGHING}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Coughing"
@@ -185,6 +234,8 @@ export default function Lung() {
           type="number" min="0"
           id="SHORTNESS_OF_BREATH"
           name="SHORTNESS_OF_BREATH"
+          value={inputData.SHORTNESS_OF_BREATH}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Shortness Of Breath"
@@ -192,13 +243,15 @@ export default function Lung() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="Swalloing Difficulty" className="block text-gray-700 font-semibold mb-2">
-          Swalloing Difficulty:
+        <label htmlFor="Swallowing Difficulty" className="block text-gray-700 font-semibold mb-2">
+          Swallowing Difficulty:
         </label>
         <input
           type="number" min="0"
-          id="SWALLOING_DIFFICULTY"
-          name="SWALLOING_DIFFICULTY"
+          id="SWALLOWING_DIFFICULTY"
+          name="SWALLOWING_DIFFICULTY"
+          value={inputData.SWALLOWING_DIFFICULTY}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter Swalloing Difficulty"
@@ -213,6 +266,8 @@ export default function Lung() {
           type="number" min="0"
           id="CHEST_PAIN"
           name="CHEST_PAIN"
+          value={inputData.CHEST_PAIN}
+          onChange={handleData}
           className="w-full px-3 py-2 border rounded-md
                   focus:outline-none focus:border-blue-500"
           placeholder="Enter age"
@@ -220,7 +275,7 @@ export default function Lung() {
         />
       </div>
       <div className="text-center">
-        <button
+        <button onClick={handleSubmit}
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600
                   focus:outline-none"

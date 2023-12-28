@@ -4,7 +4,7 @@ import React from 'react'
 export default function About() {
   return (
     <>
-    <div className=' h-[100vh] bg-red-400 p-8'>
+    <div className='h-[100vh] bg-blue-400 p-9'>
     <div className="container mx-auto px-4">
       <div className="max-w-2xl mx-auto text-center">
         <h2 className="text-4xl font-semibold mb-4">About Cancer Prediction</h2>
