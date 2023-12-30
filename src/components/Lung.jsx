@@ -21,7 +21,7 @@ export default function Lung() {
   const handleSubmit = (e)=>{
     e.preventDefault();
   for (let i in inputData) inputData[i] = Number(inputData[i])
-    axios.post("http://127.0.0.1:8000/api/v1/lung-predict", inputData)
+    axios.post("https://cancer-prediction-xc69.onrender.com/api/v1/lung-predict", inputData)
     .then((response)=>{
       console.log(response.data);
       setMessage(response.data.message);
